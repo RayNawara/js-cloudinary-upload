@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express')
 require('express-async-errors');
 const multer = require('multer')
-const port = 3002;
+const port = process.env.PORT || 3000;
 
 const app = express()
 
