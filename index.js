@@ -34,9 +34,6 @@ cloudinary.config({
   api_key: process.env.CLOUD_API_KEY,
   api_secret: process.env.CLOUD_API_SECRET,
 })
-console.log(process.env.CLOUD_NAME);
-console.log(process.env.CLOUD_API_KEY);
-console.log(process.env.CLOUD_API_SECRET);
 
 async function uploadToCloudinary(locaFilePath) {
   // locaFilePath :
@@ -49,7 +46,7 @@ async function uploadToCloudinary(locaFilePath) {
 
   return cloudinary.uploader.upload(locaFilePath, { "public_id": filePathOnCloudinary })
     .then((result) => {
-      console.log('Result = ', result);
+      // console.log('Result = ', result);
       // Image has been successfully uploaded on cloudinary
       // So we dont need local image file anymore
       // Remove file from local uploads folder 
@@ -85,9 +82,9 @@ app.post('/profile-upload-single', upload.single('profile-file'), async (req, re
   // req.file is the `profile-file` file
   // req.body will hold the text fields, if there were any
   const locaFilePath = req.file.path
-  console.log(locaFilePath);
+  // console.log(locaFilePath);
   const result = await uploadToCloudinary(locaFilePath)
-  console.log('Result = ', result);
+  // console.log('Result = ', result);
   const response = buildSuccessMsg([result.url])
 
   return res.send(response)
